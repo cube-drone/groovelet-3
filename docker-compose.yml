@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  openresty:
+    image: openresty/openresty:alpine
+    ports:
+      - "1313:1313"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./public:/temp/public
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

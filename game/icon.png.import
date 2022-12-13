@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dedctmn0vdtuv"
-path="res://.godot/imported/hair-normals.png-606c3c6be7541743ac0d4266878ad9de.ctex"
+uid="uid://du1n2efq68rwq"
+path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spritesheets/base/hair-normals.png"
-dest_files=["res://.godot/imported/hair-normals.png-606c3c6be7541743ac0d4266878ad9de.ctex"]
+source_file="res://icon.png"
+dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"]
 
 [params]
 

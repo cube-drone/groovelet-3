@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb15i5y64j0ol"]
+
+[ext_resource type="Script" path="res://tools/transparent_parent_area.gd" id="1_fheog"]
+
+[node name="TransparentParentArea" type="Node2D"]
+script = ExtResource("1_fheog")

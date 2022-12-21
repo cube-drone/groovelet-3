@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dao1mcxcu56h7"]
+
+[ext_resource type="Texture2D" uid="uid://dp3bbes16unmk" path="res://sprites/oths_room/wall-hockeystick.png" id="1_eg3s4"]
+[ext_resource type="Texture2D" uid="uid://b2o3wj7nl8rh1" path="res://sprites/oths_room/wall-hockeystick-normals.png" id="2_xm1aa"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hhln7"]
+diffuse_texture = ExtResource("1_eg3s4")
+normal_texture = ExtResource("2_xm1aa")
+
+[node name="hockeystick-wall" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_hhln7")

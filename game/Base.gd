@@ -40,7 +40,6 @@ func get_input():
 	velocity = speed * input_direction
 	
 func set_direction(input_direction):
-	$AnimationPlayer.play("reset")
 	if(input_direction.x < 0 && input_direction.y < 0):
 		direction = "ul"
 	elif(input_direction.x < 0 && input_direction.y > 0):
@@ -58,6 +57,6 @@ func set_direction(input_direction):
 	elif(input_direction.y > 0):
 		direction = "down"
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()
 	move_and_slide()

@@ -450,8 +450,13 @@ shape = SubResource("RectangleShape2D_6qeqb")
 z_index = -1
 position = Vector2(-11, 0)
 
+[node name="PointLight2D" parent="Firefly/RelativePosition" index="1"]
+texture_scale = 0.03
+
 [node name="Circle" type="AnimationPlayer" parent="Firefly"]
 autoplay = "twirl"
 libraries = {
 "": SubResource("AnimationLibrary_k11wj")
 }
+
+[editable path="Firefly"]

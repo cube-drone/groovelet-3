@@ -29,30 +29,30 @@ func get_input():
 		set_direction(input_direction)
 		$AnimationPlayer.play("RESET")
 		if(input_direction.x == 0 && input_direction.y == 0):
-			#$AnimationPlayer.play("RESET")
+			$AnimationPlayer.play("idle")
 			pass
 		else:
 			if(run):
-				$AnimationPlayer.play("run_"+direction)
+				$AnimationPlayer.play(direction+"_run")
 			else:
-				$AnimationPlayer.play("walk_"+direction)
+				$AnimationPlayer.play(direction+"_walk")
 		
 	velocity = speed * input_direction
 	
 func set_direction(input_direction):
 	$AnimationPlayer.play("reset")
 	if(input_direction.x < 0 && input_direction.y < 0):
-		direction = "upleft"
+		direction = "ul"
 	elif(input_direction.x < 0 && input_direction.y > 0):
-		direction = "downleft"
+		direction = "dl"
 	elif(input_direction.x > 0 && input_direction.y < 0):
-		direction = "upright"
+		direction = "ur"
 	elif(input_direction.x > 0 && input_direction.y > 0):
-		direction = "downright"
+		direction = "dr"
 	elif(input_direction.x < 0):
-		direction = "left"
+		direction = "l"
 	elif(input_direction.x > 0):
-		direction = "right"
+		direction = "r"
 	elif(input_direction.y < 0):
 		direction = "up"
 	elif(input_direction.y > 0):

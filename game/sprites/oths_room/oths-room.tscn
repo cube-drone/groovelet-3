@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://jiqcl3ywkvik"]
+
+[ext_resource type="Texture2D" uid="uid://bpvf1ks46uaqw" path="res://sprites/oths_room/othroom-base.png" id="1_a2hwa"]
+[ext_resource type="Texture2D" uid="uid://htnm0x1g16xe" path="res://sprites/oths_room/othroom-base-normals.png" id="2_euptc"]
+[ext_resource type="Texture2D" uid="uid://g5m0xxt74ess" path="res://light/light.png" id="3_bj3rf"]
+[ext_resource type="PackedScene" uid="uid://c527h06s5w5bh" path="res://sprites/oths_room/hockeystick-wall-vanishing.tscn" id="4_ruhpr"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5w3rt"]
+diffuse_texture = ExtResource("1_a2hwa")
+normal_texture = ExtResource("2_euptc")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r53f8"]
+polygon = PackedVector2Array(13, 5, 26, -11, 27, -56, 31, -58, 31, -33, 44, -44, 50, -44, 56, -40, 57, -7, 41, -4, 34, 1, 34, 126, 30, 132, 29, 96, 29, 20)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d4btv"]
+polygon = PackedVector2Array(15, -129.5, -49, -128.5, -62, -145.5, -61, -252.5, 20, -251.5, 21, -219.5, 24, -224.5, 22, -258.5, -67, -258.5, -67, -139.5, -51, -122.5, 19, -123.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fekh2"]
+polygon = PackedVector2Array(82, -249.5, 89, -240.5, 88, -152.5, 88, -136.5, 206, -139.5, 213, -129.5, 217, -130.5, 217, -140.5, 223, -146.5, 260, -146.5, 268, -140.5, 267, -66.5, 274, -67.5, 274, -142.5, 261, -151.5, 220, -152.5, 210, -143.5, 94, -141.5, 93, -239.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_asit0"]
+polygon = PackedVector2Array(34, -8.5, 35, -6.5, 109, 17.5, 109, 22.5, 30, -2.5, 30, -11.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxlin"]
+polygon = PackedVector2Array(219, -81.5, 210, -81.5, 211, -45.5, 215, -46.5, 215, 5.5, 205, 16.5, 147, 16.5, 145, 15.5, 146, 21.5, 206, 22.5, 215, 11.5, 215, 34.5, 215, 74.5, 293, 99.5, 294, 94.5, 216, 71.5, 218, 34.5, 219, -47.5, 214, -53.5, 220, -65.5, 274, -65.5, 275, -101.5, 266, -99.5, 266, -68.5, 221, -67.5)
+
+[node name="oths-room" type="Node2D"]
+
+[node name="OthLevelBase" type="Sprite2D" parent="."]
+z_index = -10
+texture = SubResource("CanvasTexture_5w3rt")
+
+[node name="Lighting" type="Node2D" parent="OthLevelBase"]
+position = Vector2(-154, 46)
+
+[node name="Lamp2" type="PointLight2D" parent="OthLevelBase/Lighting"]
+position = Vector2(-53, -207.5)
+color = Color(0.843137, 0.984314, 0.984314, 1)
+energy = 0.3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 30.0
+texture = ExtResource("3_bj3rf")
+height = 100.0
+metadata/_edit_lock_ = true
+
+[node name="Lamp" type="PointLight2D" parent="OthLevelBase/Lighting"]
+position = Vector2(80, -118.5)
+color = Color(0.843137, 0.984314, 0.984314, 1)
+energy = 0.3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 30.0
+texture = ExtResource("3_bj3rf")
+height = 100.0
+metadata/_edit_lock_ = true
+
+[node name="Lamp3" type="PointLight2D" parent="OthLevelBase/Lighting"]
+position = Vector2(242, -136.5)
+color = Color(0.843137, 0.984314, 0.984314, 1)
+energy = 0.3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 20.0
+texture = ExtResource("3_bj3rf")
+height = 100.0
+metadata/_edit_lock_ = true
+
+[node name="Sun" type="PointLight2D" parent="OthLevelBase/Lighting"]
+position = Vector2(-348, -2421.5)
+color = Color(0.615686, 0.952941, 0.996078, 1)
+energy = 5.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("3_bj3rf")
+texture_scale = 5.0
+height = 100.0
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
+position = Vector2(0, -132.5)
+occluder = SubResource("OccluderPolygon2D_r53f8")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
+occluder = SubResource("OccluderPolygon2D_d4btv")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
+occluder = SubResource("OccluderPolygon2D_fekh2")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
+occluder = SubResource("OccluderPolygon2D_asit0")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
+occluder = SubResource("OccluderPolygon2D_bxlin")
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="bottomleft-collision" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/bottomleft-collision"]
+polygon = PackedVector2Array(-120, -68, -119, 39, -44, 63, -44, 68, -125, 43, -125, -12, -196, -12, -195, -19, -125, -19, -125, -69)
+
+[node name="roof-collision" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/roof-collision"]
+polygon = PackedVector2Array(-72, -201, -71, -179, -67, -176, -66, -67, 63, -66, 64, -68, 68, -71, 107, -71, 112, -65, 112, -58, 122, -58, 121, -94, 108, -109, 102, -109, 98, -181, 48, -180, -1, -223, -72, -223)
+
+[node name="bedroom-collision" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/bedroom-collision"]
+polygon = PackedVector2Array(-98, -66, -97, -126, -102, -132, -113, -132, -122, -138, -122, -146, -128, -146, -128, -97, -140, -84, -203, -84, -216, -99, -216, -183, -134, -183, -132, -192, -79, -192, -67, -182, -66, -209, -129, -208, -133, -213, -221, -213, -221, -94, -205, -77, -138, -78, -124, -65)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D"]
+polygon = PackedVector2Array(-8, 62, -8, 68, 52, 68, 66, 53, 67, -14, 122, -14, 122, -59, 112, -58, 112, -22, 65, -22, 65, -37, 57, -37, 57, -1, 58, 15, 57, 52, 51, 62)
+
+[node name="hockeystick-wall-vanishing" parent="." instance=ExtResource("4_ruhpr")]
+position = Vector2(-38, 41)

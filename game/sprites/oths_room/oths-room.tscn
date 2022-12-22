@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jiqcl3ywkvik"]
+[gd_scene load_steps=20 format=3 uid="uid://jiqcl3ywkvik"]
 
 [ext_resource type="Texture2D" uid="uid://bpvf1ks46uaqw" path="res://sprites/oths_room/othroom-base.png" id="1_a2hwa"]
 [ext_resource type="Texture2D" uid="uid://htnm0x1g16xe" path="res://sprites/oths_room/othroom-base-normals.png" id="2_euptc"]
@@ -12,13 +12,13 @@ diffuse_texture = ExtResource("1_a2hwa")
 normal_texture = ExtResource("2_euptc")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r53f8"]
-polygon = PackedVector2Array(13, 5, 26, -11, 27, -56, 31, -58, 31, -33, 44, -44, 50, -44, 56, -40, 57, -7, 41, -4, 34, 1, 34, 126, 30, 132, 29, 96, 29, 20)
+polygon = PackedVector2Array(14, 9.5, 30, -8.5, 27, -56, 31, -58, 31, -33, 44, -44, 50, -44, 56, -40, 57, -7, 41, -4, 34, 1, 34, 126, 30, 132, 29, 96, 28, 27.5)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d4btv"]
-polygon = PackedVector2Array(15, -129.5, -49, -128.5, -62, -145.5, -61, -252.5, 20, -251.5, 21, -219.5, 24, -224.5, 22, -258.5, -67, -258.5, -67, -139.5, -51, -122.5, 19, -123.5)
+polygon = PackedVector2Array(-62, -142, -61, -252.5, 20, -251.5, 21, -219.5, 24, -224.5, 22, -258.5, -67, -258.5, -67, -183)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fekh2"]
-polygon = PackedVector2Array(82, -249.5, 89, -240.5, 88, -152.5, 88, -136.5, 206, -139.5, 213, -129.5, 217, -130.5, 217, -140.5, 223, -146.5, 260, -146.5, 268, -140.5, 267, -66.5, 274, -67.5, 274, -142.5, 261, -151.5, 220, -152.5, 210, -143.5, 94, -141.5, 93, -239.5)
+polygon = PackedVector2Array(82, -249.5, 89, -240.5, 88.614, -206.536, 87, -206, 88, -152.5, 88, -139, 206, -139.5, 212, -131, 217, -131, 217, -140.5, 223, -146.5, 260, -146.5, 268, -140.5, 267, -66.5, 274, -67.5, 274, -142.5, 262, -154, 220, -152.5, 210, -143.5, 94, -143, 93, -239.5)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_asit0"]
 polygon = PackedVector2Array(34, -8.5, 35, -6.5, 109, 17.5, 109, 22.5, 30, -2.5, 30, -11.5)
@@ -41,6 +41,12 @@ polygon = PackedVector2Array(-82, -41, -82, -1, -7, 22, -7, 27, -87, 3, -87, -41
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_43ony"]
 polygon = PackedVector2Array(30, 21, 89, 21, 100, 10, 100, 17, 90, 27, 30, 27)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h6o77"]
+polygon = PackedVector2Array(-216, -142, -216, -140, -203, -126, -141, -126, -128, -139, -128, -146, -122, -146, -122, -137, -140, -120, -204, -121, -221, -136, -221, -142)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a2fxk"]
+polygon = PackedVector2Array(58, -221, 62, -217, 62, -108, 75, -94, 136, -94, 150, -109, 150, -151, 156, -151, 155, -107, 137, -89, 73, -89, 57, -106)
+
 [node name="oths-room" type="Node2D"]
 
 [node name="OthLevelBase" type="Sprite2D" parent="."]
@@ -49,18 +55,6 @@ texture = SubResource("CanvasTexture_5w3rt")
 
 [node name="Lighting" type="Node2D" parent="OthLevelBase"]
 position = Vector2(-154, 46)
-
-[node name="Lamp2" type="PointLight2D" parent="OthLevelBase/Lighting"]
-position = Vector2(-49, -217)
-color = Color(0.843137, 0.984314, 0.984314, 1)
-energy = 0.3
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-shadow_filter = 1
-shadow_filter_smooth = 30.0
-texture = ExtResource("3_bj3rf")
-height = 9.0
-metadata/_edit_lock_ = true
 
 [node name="Sun" type="PointLight2D" parent="OthLevelBase/Lighting"]
 position = Vector2(-348, -2421.5)
@@ -74,10 +68,6 @@ height = 100.0
 metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
-position = Vector2(0, -132.5)
-occluder = SubResource("OccluderPolygon2D_r53f8")
-
-[node name="LightOccluder2D6" type="LightOccluder2D" parent="OthLevelBase/Lighting"]
 position = Vector2(0, -132.5)
 occluder = SubResource("OccluderPolygon2D_r53f8")
 
@@ -139,6 +129,19 @@ texture = ExtResource("3_bj3rf")
 height = 100.0
 metadata/_edit_lock_ = true
 
+[node name="Bedroom" type="Node2D" parent="OthLevelBase/Lighting"]
+
+[node name="Lamp2" type="PointLight2D" parent="OthLevelBase/Lighting/Bedroom"]
+position = Vector2(14, -244)
+color = Color(0.843137, 0.984314, 0.984314, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 30.0
+texture = ExtResource("3_bj3rf")
+height = 9.0
+
 [node name="Collision" type="Node2D" parent="."]
 visible = false
 
@@ -195,7 +198,6 @@ z_index = 10
 position = Vector2(-172, -106)
 
 [node name="TransparentParentArea" parent="wall-smile" instance=ExtResource("5_urkcm")]
-visible = false
 position = Vector2(172, 106)
 
 [node name="Area2D" type="Area2D" parent="wall-smile/TransparentParentArea"]
@@ -206,5 +208,10 @@ polygon = PackedVector2Array(-215, -139, -204, -127, -141, -126, -127, -140, -12
 [node name="VisibleGroup" type="Node2D" parent="wall-smile/TransparentParentArea"]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="wall-smile/TransparentParentArea/VisibleGroup"]
+occluder = SubResource("OccluderPolygon2D_h6o77")
 
 [node name="TransparentGroup" type="Node2D" parent="wall-smile/TransparentParentArea"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="wall-smile/TransparentParentArea/TransparentGroup"]
+position = Vector2(-278, 12)
+occluder = SubResource("OccluderPolygon2D_a2fxk")

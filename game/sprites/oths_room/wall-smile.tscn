@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bvm3jpirvgu8h"]
+[gd_scene load_steps=4 format=3 uid="uid://bvm3jpirvgu8h"]
 
-[node name="wall-smile" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cw0m3huylqfrr" path="res://sprites/oths_room/wall-smile.png" id="1_nxyc6"]
+[ext_resource type="Texture2D" uid="uid://i582aj6wc46a" path="res://sprites/oths_room/wall-smile-normals.png" id="2_rd6cu"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xm1ld"]
+diffuse_texture = ExtResource("1_nxyc6")
+normal_texture = ExtResource("2_rd6cu")
+
+[node name="wall-smile" type="Sprite2D"]
+texture = SubResource("CanvasTexture_xm1ld")

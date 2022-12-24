@@ -4,6 +4,18 @@
 #	This is intended to be used to build scene elements that are opaque until you walk "under" them
 extends Node2D
 
+var base_opacity = 1.0
+var transparent_opacity = 0.6
+var current_opacity = base_opacity
+
+var t = 0
+var ta = 0
+var animation_length_seconds = 0.3
+
+var animating = false
+var going_transparent = false
+var going_opaque = false
+
 func _ready():
 	# get parent and child, check to make sure that they are sane
 	var parent = get_parent()
@@ -22,8 +34,78 @@ func _ready():
 	
 	# for good measure, make sure that we're in the "non-transparent" state
 
+## we'll go bake an easing function library in a moment, for now let's just make linear and cubic our boys
+func linear(x):
+	return x
+
+func cubic(x):
+	return x*x*x
+	
+func easeInOutElastic(x):
+	var c5 = (2 * 3.14) / 4.5
+	if(x <= 0):
+		return 0.0
+	if(x >= 1):
+		return 1.0
+	if(x < 0.5):
+		return -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2.0
+	if(x >= 0.5):
+		return (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2.0 + 1.0
+
+func normalize(t, delta, animation_length_seconds):
+	var ta = t + delta / animation_length_seconds 
+	if ta >= 1:
+		return 1.0
+	if ta <= 0:
+		return 0.0
+	return ta
+
+func easing(x):
+	return cubic(x)
+
+func _process(delta):
+	if not animating:
+		return
+	else:
+		t = normalize(t, delta, animation_length_seconds)
+		ta = easing(t)
+		if t >= 1:
+			animating = false
+							
+		if going_transparent:
+			get_parent().modulate.a = transparent_animation(ta)
+			if not animating:
+				going_transparent = false
+		if going_opaque:
+			get_parent().modulate.a = opaquify_animation(ta)
+			if not animating:
+				going_opaque = false
+		print("t : ", t)
+		print("ta: ", ta)
+		print("o: ", get_parent().modulate.a)
+
+func transparent_animation(a):
+	# from base_opacity to transparent_opacity
+	var difference = base_opacity - transparent_opacity
+	print("Diff: ", difference)
+	var animated_difference = a * difference
+	print("A Diff: ", animated_difference)
+	print("Opacity: ", base_opacity - animated_difference)
+	return base_opacity - animated_difference
+
+func opaquify_animation(a):
+	# from transparent_opacity to base_opacity
+	var difference = base_opacity - transparent_opacity
+	var animated_difference = a * difference
+	return transparent_opacity + animated_difference
+
 func transparentify_parent():
-	get_parent().modulate.a = 0.6
+	print("triggered");
+	animating = true
+	t = 0.0
+	going_opaque = false
+	going_transparent = true
+	#get_parent().modulate.a = 0.6
 
 func hide_visible_children():
 	for child in get_children():
@@ -33,7 +115,11 @@ func hide_visible_children():
 			child.show()
 
 func opaquify_parent():
-	get_parent().modulate.a = 1.0
+	animating = true
+	t = 0.0
+	going_opaque = true
+	going_transparent = false
+	#get_parent().modulate.a = 1.0
 
 func show_visible_children():
 	for child in get_children():

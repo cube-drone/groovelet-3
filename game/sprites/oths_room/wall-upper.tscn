@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://0tr8jl5mo3a8"]
+
+[ext_resource type="Texture2D" uid="uid://bkd4ofa1qtic3" path="res://sprites/oths_room/wall-upper.png" id="1_doqf1"]
+[ext_resource type="Texture2D" uid="uid://bl01pf3qai7f0" path="res://sprites/oths_room/wall-upper-normals.png" id="2_3cyjy"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y260u"]
+diffuse_texture = ExtResource("1_doqf1")
+normal_texture = ExtResource("2_3cyjy")
+
+[node name="wall-upper" type="Sprite2D"]
+texture = SubResource("CanvasTexture_y260u")

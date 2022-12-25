@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://jiqcl3ywkvik"]
+[gd_scene load_steps=24 format=3 uid="uid://jiqcl3ywkvik"]
 
 [ext_resource type="Texture2D" uid="uid://bpvf1ks46uaqw" path="res://sprites/oths_room/othroom-base.png" id="1_a2hwa"]
 [ext_resource type="Texture2D" uid="uid://htnm0x1g16xe" path="res://sprites/oths_room/othroom-base-normals.png" id="2_euptc"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dao1mcxcu56h7" path="res://sprites/oths_room/wall-hockeystick.tscn" id="4_2pv20"]
 [ext_resource type="PackedScene" uid="uid://cb15i5y64j0ol" path="res://tools/TransparentParentArea.tscn" id="5_urkcm"]
 [ext_resource type="PackedScene" uid="uid://bvm3jpirvgu8h" path="res://sprites/oths_room/wall-smile.tscn" id="6_pywvl"]
+[ext_resource type="PackedScene" uid="uid://jsxgjhtjb2pw" path="res://sprites/oths_room/door-down.tscn" id="7_yt41b"]
+[ext_resource type="PackedScene" uid="uid://0tr8jl5mo3a8" path="res://sprites/oths_room/wall-upper.tscn" id="8_4bbpb"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5w3rt"]
 diffuse_texture = ExtResource("1_a2hwa")
@@ -47,6 +49,12 @@ polygon = PackedVector2Array(-216, -142, -216, -140, -203, -126, -141, -126, -12
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a2fxk"]
 polygon = PackedVector2Array(58, -221, 62, -217, 62, -108, 75, -94, 136, -94, 150, -109, 150, -151, 156, -151, 155, -107, 137, -89, 73, -89, 57, -106)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gccox"]
+polygon = PackedVector2Array(5, -11, 10, 21, 10, 30, 4, 28, 5, 18, 1, -11)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cm5c1"]
+polygon = PackedVector2Array(-6, -44, -2, -27, 4, -26, -1, -47)
+
 [node name="oths-room" type="Node2D"]
 
 [node name="OthLevelBase" type="Sprite2D" parent="."]
@@ -59,7 +67,7 @@ position = Vector2(-154, 46)
 [node name="Sun" type="PointLight2D" parent="OthLevelBase/Lighting"]
 position = Vector2(-348, -2421.5)
 color = Color(0.615686, 0.952941, 0.996078, 1)
-energy = 5.0
+energy = 3.0
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("3_bj3rf")
@@ -105,7 +113,7 @@ height = 100.0
 metadata/_edit_lock_ = true
 
 [node name="Low Light2" type="PointLight2D" parent="OthLevelBase/Lighting/Living Room"]
-position = Vector2(137, 5)
+position = Vector2(127, 38)
 color = Color(0.843137, 0.984314, 0.984314, 1)
 energy = 0.1
 shadow_enabled = true
@@ -114,7 +122,6 @@ shadow_filter = 1
 shadow_filter_smooth = 30.0
 texture = ExtResource("3_bj3rf")
 height = 100.0
-metadata/_edit_lock_ = true
 
 [node name="Bathroom" type="Node2D" parent="OthLevelBase/Lighting"]
 
@@ -132,7 +139,7 @@ metadata/_edit_lock_ = true
 [node name="Bedroom" type="Node2D" parent="OthLevelBase/Lighting"]
 
 [node name="Lamp2" type="PointLight2D" parent="OthLevelBase/Lighting/Bedroom"]
-position = Vector2(12, -246)
+position = Vector2(-16, -242)
 color = Color(0.843137, 0.984314, 0.984314, 1)
 energy = 0.5
 shadow_enabled = true
@@ -172,6 +179,7 @@ position = Vector2(-38, 41)
 [node name="TransparentParentArea" parent="hockeystick-wall" instance=ExtResource("5_urkcm")]
 
 [node name="Area2D" type="Area2D" parent="hockeystick-wall/TransparentParentArea"]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hockeystick-wall/TransparentParentArea/Area2D"]
 polygon = PackedVector2Array(-85, -55, -6, -29, 87, -28, 98, -36, 98, -25, 99, 13, 89, 23, 29, 23, -6, 23, -85, -2, -85, -38, -86, -41)
@@ -216,3 +224,33 @@ occluder = SubResource("OccluderPolygon2D_h6o77")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="wall-smile/TransparentParentArea/TransparentGroup"]
 position = Vector2(-278, 12)
 occluder = SubResource("OccluderPolygon2D_a2fxk")
+
+[node name="door-down-deck" parent="." instance=ExtResource("7_yt41b")]
+z_index = 10
+position = Vector2(-82.0014, -79.75)
+scale = Vector2(0.88895, 0.809091)
+
+[node name="door-down-outside" parent="." instance=ExtResource("7_yt41b")]
+z_index = 10
+position = Vector2(-26.75, 45)
+scale = Vector2(1.01111, 1)
+
+[node name="wall-upper" parent="." instance=ExtResource("8_4bbpb")]
+position = Vector2(-132, -165)
+
+[node name="TransparentParentArea" parent="wall-upper" instance=ExtResource("5_urkcm")]
+
+[node name="Area2D" type="Area2D" parent="wall-upper/TransparentParentArea"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall-upper/TransparentParentArea/Area2D"]
+polygon = PackedVector2Array(36, -10, 38, -2, 28, 21, 23, 35, 8, 46, -9, 36, -22, 22, -24, -28, 34, -29)
+
+[node name="VisibleGroup" type="Node2D" parent="wall-upper/TransparentParentArea"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="wall-upper/TransparentParentArea/VisibleGroup"]
+occluder = SubResource("OccluderPolygon2D_gccox")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="wall-upper/TransparentParentArea/VisibleGroup"]
+occluder = SubResource("OccluderPolygon2D_cm5c1")
+
+[node name="TransparentGroup" type="Node2D" parent="wall-upper/TransparentParentArea"]

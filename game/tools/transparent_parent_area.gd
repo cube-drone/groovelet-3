@@ -80,17 +80,11 @@ func _process(delta):
 			get_parent().modulate.a = opaquify_animation(ta)
 			if not animating:
 				going_opaque = false
-		print("t : ", t)
-		print("ta: ", ta)
-		print("o: ", get_parent().modulate.a)
 
 func transparent_animation(a):
 	# from base_opacity to transparent_opacity
 	var difference = base_opacity - transparent_opacity
-	print("Diff: ", difference)
 	var animated_difference = a * difference
-	print("A Diff: ", animated_difference)
-	print("Opacity: ", base_opacity - animated_difference)
 	return base_opacity - animated_difference
 
 func opaquify_animation(a):
@@ -100,7 +94,6 @@ func opaquify_animation(a):
 	return transparent_opacity + animated_difference
 
 func transparentify_parent():
-	print("triggered");
 	animating = true
 	t = 0.0
 	going_opaque = false

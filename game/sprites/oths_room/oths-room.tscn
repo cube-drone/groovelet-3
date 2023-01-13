@@ -78,17 +78,6 @@ normal_texture = ExtResource("12_1jlmm")
 [node name="Lighting" type="Node2D" parent="."]
 position = Vector2(-154, 46)
 
-[node name="Sun" type="PointLight2D" parent="Lighting"]
-position = Vector2(-348, -2421.5)
-color = Color(0.615686, 0.952941, 0.996078, 1)
-energy = 3.0
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("3_bj3rf")
-texture_scale = 5.0
-height = 100.0
-metadata/_edit_lock_ = true
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
 position = Vector2(0, -132.5)
 occluder = SubResource("OccluderPolygon2D_r53f8")

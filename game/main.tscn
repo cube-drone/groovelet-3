@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvogf7n3t1a20"]
+[gd_scene load_steps=14 format=3 uid="uid://bvogf7n3t1a20"]
 
 [ext_resource type="PackedScene" uid="uid://jiqcl3ywkvik" path="res://sprites/oths_room/oths-room.tscn" id="1_dxm5w"]
 [ext_resource type="Texture2D" uid="uid://ymdk0tpc2wdd" path="res://sprites/256x224.png" id="1_ejxbx"]
@@ -6,6 +6,8 @@
 [ext_resource type="Shader" path="res://shaders/crt-worse.gdshader" id="6_lbra4"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="6_pw2kv"]
 [ext_resource type="Texture2D" uid="uid://dr2mc30cgn6le" path="res://sprites/256x224_white.png" id="7_3lnkh"]
+[ext_resource type="PackedScene" uid="uid://0hba8mfq1qkv" path="res://dialog/dialogbox.tscn" id="7_uwps4"]
+[ext_resource type="Texture2D" uid="uid://g5m0xxt74ess" path="res://light/light.png" id="9_bhe57"]
 [ext_resource type="PackedScene" uid="uid://cmx2uebiu4d4m" path="res://base.tscn" id="10_mp1ru"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ango"]
@@ -56,6 +58,39 @@ shader_parameter/clip_warp = null
 shader_parameter/vignette_intensity = null
 shader_parameter/vignette_opacity = null
 
+[sub_resource type="Animation" id="Animation_jdxjv"]
+resource_name = "DEFAULT"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -54), Vector2(0, 106)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.8, 0.75]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5frr"]
+_data = {
+"DEFAULT": SubResource("Animation_jdxjv")
+}
+
 [node name="main" type="Node2D"]
 position = Vector2(-1, 0)
 
@@ -82,7 +117,12 @@ position = Vector2(119, 66)
 current = true
 metadata/_edit_lock_ = true
 
+[node name="dialogbox" parent="Camera2D" instance=ExtResource("7_uwps4")]
+position = Vector2(-128, 60)
+
 [node name="CRT-good" type="TextureRect" parent="Camera2D"]
+light_mask = 4
+z_index = 1000
 material = SubResource("ShaderMaterial_4ango")
 offset_left = -128.0
 offset_top = -112.0
@@ -93,6 +133,8 @@ metadata/_edit_lock_ = true
 
 [node name="CRT-bad" type="TextureRect" parent="Camera2D"]
 visible = false
+light_mask = 4
+z_index = 1000
 material = SubResource("ShaderMaterial_m6n4t")
 offset_left = -128.0
 offset_top = -112.0
@@ -125,3 +167,14 @@ z_index = -1000
 position = Vector2(-119, 66.5)
 texture = ExtResource("1_p2c50")
 metadata/_edit_lock_ = true
+
+[node name="CRT-light" type="PointLight2D" parent="Camera2D"]
+position = Vector2(0, 106)
+range_item_cull_mask = 4
+texture = ExtResource("9_bhe57")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/CRT-light"]
+autoplay = "DEFAULT"
+libraries = {
+"": SubResource("AnimationLibrary_l5frr")
+}

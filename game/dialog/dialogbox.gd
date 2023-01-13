@@ -2,45 +2,39 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	say("hi")
+	say("there once was a man on movember - who's mustache lasted 'til december")
+
+func letter_elements():
+	var arr = []
+	arr.append_array($letters/top.get_children())
+	arr.append_array($letters/middle.get_children())
+	arr.append_array($letters/bottom.get_children())
+	return arr
 
 func say(string):
 	clear()
 	var counter = 0
 	var listifiedString = []
 	
-	for char in string:
-		listifiedString.push_back(char)
-
-	for child in $letters/top.get_children():
+	for child in letter_elements():
 		if(counter <= string.length() - 1):
-			child.text = listifiedString[counter]
-		else:
-			child.text = " "
+			child.setChar(string[counter])
+			child.wiggle()
+			await get_tree().create_timer(0.15).timeout
+			
 		counter = counter + 1
-	for child in $letters/middle.get_children():
-		counter = counter + 1
-		child.text = " "
-	for child in $letters/bottom.get_children():
-		counter = counter + 1
-		child.text = " "
-	pass
 
 func clear():
-	for child in $letters/top.get_children():
-		child.text = " "
-	for child in $letters/middle.get_children():
-		child.text = " "
-	for child in $letters/bottom.get_children():
-		child.text = " "
+	for child in letter_elements():
+		child.setChar(" ")
 
 func aaaa():
-	for child in $letters/top.get_children():
-		child.text = "a"
-	for child in $letters/middle.get_children():
-		child.text = "a"
-	for child in $letters/bottom.get_children():
-		child.text = "a"
+	for child in letter_elements():
+		child.setChar("a")
+
+func wobble():
+	for child in letter_elements():
+		child.wobble()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -2,6 +2,7 @@ extends Node2D
 
 var line_length = 34
 var default_speed = 0.07
+var pause_time = 1.0
 
 # command language:
 # everything between %% is a command
@@ -10,7 +11,13 @@ var default_speed = 0.07
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	say("charming superflous valorous %w%chimichangas%w% rustle gloriously in all weather conditions, regardless")
+	await say("%r%ROYAL RAINBOW beeeoooooowwwww")
+	#await say("then the keyboard was like %k%clacka clacka clacka clacka %p% ker-ching!%k% %p%")
+	#await say("and then he said %W%WHOOOAAAAH HAH%W%!!! %p%")
+	#await say("normal %f%fast fast fast%f% %s%slow slow slow%s% and then %p%stop")
+	#await say("the radio this morning promised %w%ten tonnes of cheese%w% to the highest bidder")
+	#await say("charming superflous valorous %w%chimichangas%w% rustle gloriously in all weather conditions, regardless")
+	
 
 func letter_elements():
 	var arr = []
@@ -60,7 +67,12 @@ func _wordwrap(string):
 func _display(string):
 	var counter = 0
 	var command_mode = false
+	var fast_flag = false
+	var slow_flag = false
 	var wiggle_flag = false
+	var wobble_flag = false
+	var kachunk_flag = false
+	var rainbow_flag = false
 	var letters = letter_elements()
 	
 	for character in string:
@@ -70,6 +82,18 @@ func _display(string):
 		elif command_mode:
 			if String(character) == "w":
 				wiggle_flag = !wiggle_flag
+			if String(character) == "W":
+				wobble_flag = !wobble_flag
+			if String(character) == "k":
+				kachunk_flag = !kachunk_flag
+			if String(character) == "r":
+				rainbow_flag = !rainbow_flag
+			if String(character) == "f":
+				fast_flag = !fast_flag
+			if String(character) == "s":
+				slow_flag = !slow_flag
+			if String(character) == "p":
+				await get_tree().create_timer(pause_time).timeout
 			if String(character) == "%":
 				command_mode = false
 		elif String(character) == "%":
@@ -79,14 +103,25 @@ func _display(string):
 			child.setChar(character)
 			if wiggle_flag:
 				child.wiggle()
+			if wobble_flag:
+				child.wobble()
+			if kachunk_flag:
+				child.kachunk()
+			if rainbow_flag:
+				child.rainbow()
 			if character != " ":
-				await get_tree().create_timer(default_speed).timeout
+				var speed = default_speed
+				if fast_flag:
+					speed = speed * 0.3
+				if slow_flag:
+					speed = speed * 2	
+				await get_tree().create_timer(speed).timeout
 			counter = counter + 1
 
 func say(string):
 	clear()
 	var wrapped_string = _wordwrap(string)
-	_display(wrapped_string)
+	await _display(wrapped_string)
 
 func clear():
 	for child in letter_elements():

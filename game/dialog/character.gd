@@ -12,9 +12,16 @@ func _process(delta):
 func setChar(c):
 	$Character.text = c
 	$Character/AnimationPlayer.play("RESET")
+	
 
 func wobble():
 	$Character/AnimationPlayer.play("wobble")
 
 func wiggle():
 	$Character/AnimationPlayer.play("wiggle")
+
+func kachunk():
+	$Character/AnimationPlayer.play("kachunk")
+
+func rainbow():
+	$Character/ColorAnimationPlayer.play("rainbow")

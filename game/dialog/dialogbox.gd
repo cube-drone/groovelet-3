@@ -2,11 +2,15 @@ extends Node2D
 
 var line_length = 34
 var default_speed = 0.07
-var control_characters = PackedStringArray(["%"])
+
+# command language:
+# everything between %% is a command
+# #w# (toggle wiggle)
+# %wr% (toggle wiggle, rainbow)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	say("charming superflous valorous #w#chimichangas#w# rustle gloriously in all weather conditions, regardless")
+	say("charming superflous valorous %w%chimichangas%w% rustle gloriously in all weather conditions, regardless")
 
 func letter_elements():
 	var arr = []
@@ -15,27 +19,26 @@ func letter_elements():
 	arr.append_array($letters/bottom.get_children())
 	return arr
 
-func _compress_control_characters(string):
-	return string.replace("#w#", "%")
-
 func _adjusted_length(string):
 	# counts length, ignoring any control characters
-	for character in control_characters:
-		string = string.replace(character, "")
-	return string.length()
+	var newstring = ""
+	var command_mode = false
+	for character in string:
+		if command_mode:
+			if String(character) == "%":
+				command_mode = false
+		elif String(character) == "%":
+			command_mode = true
+		else:
+			newstring = newstring + character
+	return newstring.length()
 
-func say(string):
-	clear()
-	
-	string = _compress_control_characters(string)
-	print(string)
-	
+func _wordwrap(string):
+	# slice everything into three lines, wrapping words (this is a very rudimentary word-wrap)
 	var rows = PackedStringArray(["", "", "", ""]) #top, middle, bottom, o'erflow
 	var current_row = 0
 	
-	# slice everything into three lines, wrapping words (this is a very rudimentary word-wrap)
 	var words = string.split(" ")
-	print(words)
 	var current_word = words[0]
 	for word in words:
 		var current_line = rows[current_row]
@@ -51,24 +54,39 @@ func say(string):
 			current_row = current_row + 1
 			rows[current_row] = rows[current_row] + word + " "
 	
-	print(rows)
-	var finalstring = "".join(rows)
-	
+	var word_wrapped_string = "".join(rows)
+	return word_wrapped_string
+
+func _display(string):
 	var counter = 0
-	var wiggleflag = false
+	var command_mode = false
+	var wiggle_flag = false
 	var letters = letter_elements()
 	
-	for character in finalstring:
-		var child = letters[counter]
-		if String(character) == "%":
-			wiggleflag = !wiggleflag
+	for character in string:
+		if(counter > letters.size() - 1):
+			print ("Warning! Phrase exceeds maximum size: ", string)
+			pass
+		elif command_mode:
+			if String(character) == "w":
+				wiggle_flag = !wiggle_flag
+			if String(character) == "%":
+				command_mode = false
+		elif String(character) == "%":
+			command_mode = true
 		else:
+			var child = letters[counter]
 			child.setChar(character)
-			if wiggleflag:
+			if wiggle_flag:
 				child.wiggle()
 			if character != " ":
 				await get_tree().create_timer(default_speed).timeout
 			counter = counter + 1
+
+func say(string):
+	clear()
+	var wrapped_string = _wordwrap(string)
+	_display(wrapped_string)
 
 func clear():
 	for child in letter_elements():

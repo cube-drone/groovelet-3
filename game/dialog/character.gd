@@ -11,6 +11,7 @@ func _process(delta):
 
 func setChar(c):
 	$Character.text = c
+	$Character/AnimationPlayer.play("RESET")
 
 func wobble():
 	$Character/AnimationPlayer.play("wobble")

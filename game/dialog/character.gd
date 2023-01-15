@@ -11,17 +11,24 @@ func _process(delta):
 
 func setChar(c):
 	$Character.text = c
-	$Character/AnimationPlayer.play("RESET")
-	
+	$Character/ColorAnimation.play("RESET")
+	$Character/ScaleAnimation.play("RESET")
+	$Character/PositionAnimation.play("RESET")
 
 func wobble():
-	$Character/AnimationPlayer.play("wobble")
+	$Character/PositionAnimation.play("wobble")
 
 func wiggle():
-	$Character/AnimationPlayer.play("wiggle")
+	$Character/PositionAnimation.play("wiggle")
+
+func jitter():
+	$Character/PositionAnimation.play("jitter")
+
+func jutter():
+	$Character/PositionAnimation.play("jutter")
 
 func kachunk():
-	$Character/AnimationPlayer.play("kachunk")
+	$Character/ScaleAnimation.play("kachunk")
 
 func rainbow():
-	$Character/ColorAnimationPlayer.play("rainbow")
+	$Character/ColorAnimation.play("rainbow")

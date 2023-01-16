@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cev6albu01k55"]
+[gd_scene load_steps=27 format=3 uid="uid://cev6albu01k55"]
 
 [ext_resource type="FontFile" uid="uid://bviw4hwe4sah6" path="res://fonts/ChevyRay - Softsquare Mono.ttf" id="1_kt6ut"]
 [ext_resource type="Script" path="res://dialog/character.gd" id="2_1x661"]
@@ -32,46 +32,214 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_u0bpo"]
-resource_name = "wobble"
-length = 0.4
-loop_mode = 2
+[sub_resource type="Animation" id="Animation_u5rg5"]
+resource_name = "world"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 1)]
+"values": [Color(1, 0.00784314, 0.0352941, 1), Color(1, 0.258824, 0.286275, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_wf3t1"]
-resource_name = "wiggle"
-length = 0.4
-loop_mode = 2
+[sub_resource type="Animation" id="Animation_10svm"]
+resource_name = "oth"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 1)]
+"values": [Color(0.00392157, 1, 0.498039, 1), Color(0.180392, 1, 0.588235, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vvbj3"]
+resource_name = "cystam"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0117647, 0.972549, 0.0470588, 1), Color(0.270588, 0.968627, 0.294118, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8w60u"]
+resource_name = "kiro"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.509804, 0.996078, 0, 1), Color(0.607843, 1, 0.188235, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iwd4j"]
+resource_name = "audient"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.952941, 1, 0, 1), Color(0.956863, 1, 0.129412, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ucn20"]
+resource_name = "mersenne"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.607843, 0, 1), Color(1, 0.678431, 0.2, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tmrxi"]
+resource_name = "path"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0.494118, 1), Color(1, 0.109804, 0.556863, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6n8et"]
+resource_name = "curopal"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.121569, 0.913725, 1), Color(1, 0.301961, 0.929412, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o368h"]
+resource_name = "blit"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.521569, 0, 1, 1), Color(0.588235, 0.14902, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p5iof"]
+resource_name = "misk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0117647, 0.4, 1, 1), Color(0.168627, 0.501961, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t0lly"]
+resource_name = "zariel"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.00392157, 1, 0.972549, 1), Color(0.0784314, 1, 0.968627, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3pf6s"]
+resource_name = "stacks"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.203922, 0.129412, 1, 1), Color(0.376471, 0.321569, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wisuc"]
 _data = {
 "RESET": SubResource("Animation_es3cj"),
+"audient": SubResource("Animation_iwd4j"),
+"blit": SubResource("Animation_o368h"),
+"curopal": SubResource("Animation_6n8et"),
+"cystam": SubResource("Animation_vvbj3"),
+"kiro": SubResource("Animation_8w60u"),
+"mersenne": SubResource("Animation_ucn20"),
+"misk": SubResource("Animation_p5iof"),
+"oth": SubResource("Animation_10svm"),
+"path": SubResource("Animation_tmrxi"),
 "rainbow": ExtResource("3_dtebx"),
-"wiggle": SubResource("Animation_wf3t1"),
-"wobble": SubResource("Animation_u0bpo")
+"stacks": SubResource("Animation_3pf6s"),
+"world": SubResource("Animation_u5rg5"),
+"zariel": SubResource("Animation_t0lly")
 }
 
 [sub_resource type="Animation" id="Animation_hrot8"]

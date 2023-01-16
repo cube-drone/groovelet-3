@@ -654,7 +654,6 @@ position = Vector2(231, 0)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(133, 17)
-color = Color(0.862745, 0.909804, 1, 1)
 energy = 0.5
 range_item_cull_mask = 2
 texture = ExtResource("4_uf6k8")

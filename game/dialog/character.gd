@@ -87,3 +87,6 @@ func misk():
 	$Character/ColorAnimation.play("misk")
 	$Character.modulate = Color("#0366ff")
 
+func black():	
+	$Character/ColorAnimation.play("black")
+	$Character.modulate = Color("#000000")

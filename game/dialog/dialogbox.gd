@@ -1,6 +1,7 @@
 extends Node2D
 
-var line_length = 34
+var actual_line_length = 34		# this is how many actual characters fit per line
+var virtual_line_length = 34	# this is how many characters we want to fit per line
 var default_speed = 0.07
 var pause_time = 1.0
 var NEWLINE_CODE = "%n"
@@ -19,8 +20,20 @@ var NEWLINE_CODE = "%n"
 # s - slow
 # 
 # ## Colors
+# 0 - zariel
 # 1 - oth (teal)
-#
+# 2 - cystam
+# 3 - kiro
+# 4 - audient
+# 5 - mersenne
+# 6 - world
+# 7 - path
+# 8 - curopal
+# 9 - blit
+# a - stacks
+# b - misk
+# X - black
+# 
 # ## Events
 # p - pause for pause_time seconds
 # n - newline
@@ -30,7 +43,7 @@ var NEWLINE_CODE = "%n"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#await say("%wr%ROYAL RAINBOW beeeoooooowwwww")
-	await say("%0%zariel%0% %1%oth%1% %2%cystam%2% %3%kiro%3% %4%audient%4% %5%mersenne%5% %6%world%6% %7%path%7% %8%curopal%8% %9%blit%9% %a%stacks%a% %b%misk%b% ")
+	await say("%0%zariel%0% %1%oth%1% %2%cystam%2% %3%kiro%3% %4%audient%4% %5%mersenne%5% %6%world%6% %7%path%7% %8%curopal%8% %9%blit%9% %a%stacks%a% %b%misk%b% %X%black%X%")
 	#await say("this %j6%coffee%j6% is so %ws6%smoooooth%ws6% %p% %n%this %J6%COFFEE%J6% is so %W6%SMOOOOOTH%W6%")
 	#await say("then the keyboard was like %k%clacka clacka clacka clacka %p% ker-ching!%k% %p%")
 	#await say("and then he said %W%WHOOOAAAAH HAH%W%!!! %p%")
@@ -41,23 +54,22 @@ func _ready():
 
 
 # poison, fire, ice words
-# todo: colors
 # todo: letters swing
 # todo: letters vanish in
+# todo: letters glow
 # todo: angle ( a little bit different every time ? )
 # todo: the whole dialog box gets whacked and all of the letters come a little loose
 # todo: little extra time after a comma or period
 # todo: "angry", "embarrassed", "sad", "frosty", "clever", "smug", "goofy", 
 # todo: multi-page "say" commands for long sentences
 # todo:  %N% as a page break
-# todo: special characters <3 :) :P ;)
+# todo: special characters - heart, music note
 # todo: "advance" button
 # todo: appear animation
 # todo: profile pic
 # todo: changeable background
 # todo: backspace
 # todo: "character set": characters might talk at different speed or with different inflections and we want to know how we can reflect that in the text box
-
 
 func letter_elements():
 	var arr = []
@@ -91,12 +103,12 @@ func _wordwrap(string):
 		var current_line = rows[current_row]
 		var prospective_line_length = _adjusted_length(current_line) + _adjusted_length(word)
 			
-		if prospective_line_length < line_length && !NEWLINE_CODE in word:
+		if prospective_line_length < virtual_line_length && !NEWLINE_CODE in word:
 			rows[current_row] = rows[current_row] + word + " "
-		elif prospective_line_length == line_length && !NEWLINE_CODE in word:
+		elif prospective_line_length == virtual_line_length && !NEWLINE_CODE in word:
 			rows[current_row] = rows[current_row] + word
 		else:
-			while _adjusted_length(rows[current_row]) < line_length:
+			while _adjusted_length(rows[current_row]) < actual_line_length:
 				rows[current_row] = rows[current_row] + " "
 			current_row = current_row + 1
 			rows[current_row] = rows[current_row] + word + " "
@@ -128,6 +140,7 @@ func _display(string):
 	var blit_flag = false #purple
 	var stacks_flag = false #blue
 	var misk_flag = false #sky
+	var black_flag = false
 	var letters = letter_elements()
 	
 	for character in string:
@@ -177,6 +190,8 @@ func _display(string):
 				stacks_flag = !stacks_flag
 			elif character == "b":
 				misk_flag = !misk_flag
+			elif character == "X":
+				black_flag = !black_flag
 			elif character == "p":
 				await get_tree().create_timer(pause_time).timeout
 			elif character == "%":
@@ -225,6 +240,8 @@ func _display(string):
 				child.stacks()
 			if misk_flag:
 				child.misk()
+			if black_flag:
+				child.black()
 			if character != " ":
 				var speed = default_speed
 				if fast_flag:

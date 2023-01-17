@@ -1,10 +1,17 @@
 extends Node2D
 
+## LINE LENGTH
 var actual_line_length = 34		# this is how many actual characters fit per line
 var virtual_line_length = 34	# this is how many characters we want to fit per line
-var default_speed = 0.07
-var pause_time = 1.0
-var NEWLINE_CODE = "%n"
+
+## TIMING
+var start_delay_seconds = 0.1	# all of the reset animations actually take some time to execute, this gives them time to run before we start rolling text 
+var end_delay_seconds = 2		# this is just to give you some time to read
+var default_speed = 0.07		# the default number of seconds between characters
+var pause_time = 0.8			# how long a %p% should take
+
+## CODES
+var NEWLINE_CODE = "%n"			# the character that kicks off a newline
 
 # Command Language:
 # everything between %% is a command
@@ -42,28 +49,53 @@ var NEWLINE_CODE = "%n"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#await say("%wr%ROYAL RAINBOW beeeoooooowwwww")
+	await clear()
+	await hide()
+	$NinePatchRect.scale.y = 0
+	
+	demo()
+
+func demo():
+	await get_tree().create_timer(5).timeout
+	
+	await say("charming superflous valorous %w%chimichangas%w% rustle gloriously in all weather conditions, regardless")
+	await say("the radio this morning promised %w4%ten tonnes of cheese%w4% to the highest bidder")
+	await say("normal %f%fast fast fast%f% %s%slow slow slow%s% and then %p%stop")
+	await say("Hello, there - how are you? %n%I'm doing okay, thanks!")
+	await say("and then he said %W%WHOOOAAAAH HAH%W%! %p%")
 	await say("%0%zariel%0% %1%oth%1% %2%cystam%2% %3%kiro%3% %4%audient%4% %5%mersenne%5% %6%world%6% %7%path%7% %8%curopal%8% %9%blit%9% %a%stacks%a% %b%misk%b% %X%black%X%")
-	#await say("this %j6%coffee%j6% is so %ws6%smoooooth%ws6% %p% %n%this %J6%COFFEE%J6% is so %W6%SMOOOOOTH%W6%")
-	#await say("then the keyboard was like %k%clacka clacka clacka clacka %p% ker-ching!%k% %p%")
-	#await say("and then he said %W%WHOOOAAAAH HAH%W%!!! %p%")
-	#await say("normal %f%fast fast fast%f% %s%slow slow slow%s% and then %p%stop")
-	#await say("the radio this morning promised %w%ten tonnes of cheese%w% to the highest bidder")
-	#await say("charming superflous valorous %w%chimichangas%w% rustle gloriously in all weather conditions, regardless")
+	await say("hi :> :0 :1 :2 :3 :4 :5 :6 :7 :8 :9 :a :b :) :| :( :w :n :N")
+	await say(":| %r%:>%r% %0%:0%0% %1%:1%1% %2%:2%2% %3%:3%3% %4%:4%4% %5%:5%5% %6%:6%6% %7%:7%7% %8%:8%8% %9%:9%9% %a%:a%a% %b%:b%b% %X%:)%X% %W%:n:N%W% :|")
+	
+	await say("this %j6%coffee%j6% is so %ws6%smoooooth%ws6% %p% %n%this %J6%COFFEE%J6% is so %W6%SMOOOOOTH%W6%")
+	await say("then the keyboard was like %k%clacka clacka clacka clacka %p% ker ching!%k% %p%")
+	await say("%wr%ROYAL RAINBOW beeeoooooowwwww")
+	
+	await say("Oh! %j%ouch!%j% - these chili peppers are hot hot %Fj%hooot%Fj%!")
+	await say("%G%BE NOT AFRAID%G%")
+	await say("%Gr%BE A LITTLE AFRAID%Gr%")
+	await say("%BW%h i, i'm  a  f i s h y  f i s h%BW%")
+	
+	await say("%Bwr%c l o w n  b u l l s h i t%Bwr%")
 
+func appear():
+	show()
+	clear()
+	$AnimationPlayer.play("appear")
+	await $AnimationPlayer.animation_finished
 
+func disappear():
+	pass
 
 # poison, fire, ice words
 # todo: letters swing
 # todo: letters vanish in
-# todo: letters glow
 # todo: angle ( a little bit different every time ? )
 # todo: the whole dialog box gets whacked and all of the letters come a little loose
 # todo: little extra time after a comma or period
 # todo: "angry", "embarrassed", "sad", "frosty", "clever", "smug", "goofy", 
 # todo: multi-page "say" commands for long sentences
 # todo:  %N% as a page break
-# todo: special characters - heart, music note
 # todo: "advance" button
 # todo: appear animation
 # todo: profile pic
@@ -71,7 +103,7 @@ func _ready():
 # todo: backspace
 # todo: "character set": characters might talk at different speed or with different inflections and we want to know how we can reflect that in the text box
 
-func letter_elements():
+func _letter_elements():
 	var arr = []
 	arr.append_array($letters/top.get_children())
 	arr.append_array($letters/middle.get_children())
@@ -84,10 +116,12 @@ func _adjusted_length(string):
 	var command_mode = false
 	for character in string:
 		if command_mode:
-			if String(character) == "%":
+			if character == "%":
 				command_mode = false
-		elif String(character) == "%":
+		elif character == "%":
 			command_mode = true
+		elif character == ":":
+			pass
 		else:
 			newstring = newstring + character
 	return newstring.length()
@@ -117,15 +151,23 @@ func _wordwrap(string):
 	return word_wrapped_string
 
 func _display(string):
+	print("displaying: ", string)
+	
 	var counter = 0
 	var command_mode = false
+	# speed
 	var fast_flag = false
 	var slow_flag = false
+	# fx
 	var wiggle_flag = false
 	var wobble_flag = false
 	var jitter_flag = false
 	var jutter_flag = false
 	var kachunk_flag = false
+	var glow_flag = false
+	var fire_flag = false
+	var bubble_flag = false
+	var sparkle_flag = false
 	#colors
 	var rainbow_flag = false
 	var zariel_flag = false; #teal
@@ -141,12 +183,23 @@ func _display(string):
 	var stacks_flag = false #blue
 	var misk_flag = false #sky
 	var black_flag = false
-	var letters = letter_elements()
+	#special characters
+	var special_character_mode = false
+	var special_character = ""
+	var wink_mode = false
+	
+	var letters = _letter_elements()
+	
+	await get_tree().create_timer(start_delay_seconds).timeout
 	
 	for character in string:
 		if(counter > letters.size() - 1):
 			print ("Warning! Phrase exceeds maximum size: ", string)
-			pass
+			break
+		elif character == ":" && !special_character_mode:
+			special_character_mode = true
+		elif character == "%" && !command_mode:
+			command_mode = true
 		elif command_mode:
 			if character == "w":
 				wiggle_flag = !wiggle_flag
@@ -165,9 +218,7 @@ func _display(string):
 			elif character == "s":
 				slow_flag = !slow_flag
 			elif character == "0":
-				print("doof")
 				zariel_flag = !zariel_flag
-				print("zflag: ", zariel_flag)
 			elif character == "1":
 				oth_flag = !oth_flag
 			elif character == "2":
@@ -192,80 +243,128 @@ func _display(string):
 				misk_flag = !misk_flag
 			elif character == "X":
 				black_flag = !black_flag
+			elif character == "B":
+				bubble_flag = !bubble_flag
+			elif character == "F":
+				fire_flag = !fire_flag
+			elif character == "S":
+				sparkle_flag = !sparkle_flag
+			elif character == "G":
+				glow_flag = !glow_flag
 			elif character == "p":
 				await get_tree().create_timer(pause_time).timeout
 			elif character == "%":
 				command_mode = false
 			else:
 				print("Unknown control character: ", character)
-		elif String(character) == "%":
-			command_mode = true
 		else:
 			var child = letters[counter]
-			child.setChar(character)
-			if wiggle_flag:
-				child.wiggle()
-			if wobble_flag:
-				child.wobble()
-			if jitter_flag:
-				child.jitter()
-			if jutter_flag:
-				child.jutter()
-			if kachunk_flag:
-				child.kachunk()
-			if rainbow_flag:
-				child.rainbow()
-			if zariel_flag:
-				print("boof")
-				child.zariel()
-			if oth_flag:
-				child.oth()
-			if cystam_flag:
-				child.cystam()
-			if kiro_flag:
-				child.kiro()
-			if audient_flag:
-				child.audient()
-			if mersenne_flag:
-				child.mersenne()
-			if world_flag:
-				child.world()
-			if path_flag:
-				child.path()
-			if curopal_flag:
-				child.curopal()
-			if blit_flag:
-				child.blit()
-			if stacks_flag:
-				child.stacks()
-			if misk_flag:
-				child.misk()
-			if black_flag:
-				child.black()
+			
+			if special_character_mode:
+				special_character_mode = false
+				if character == "(":
+					child.setSpecial(":(")
+				elif character == "|":
+					child.setSpecial(":|")
+				elif character == ")":
+					child.setSpecial(":)")
+				elif character == "w":
+					child.setSpecial(";)")
+				elif character == "n":
+					child.setSpecial("note")
+				elif character == "N":
+					child.setSpecial("doublenote")
+				elif character == ">":
+					child.setSpecial("heart")
+				elif character == "\\":
+					child.setChar(":") #escape the :
+				else:
+					child.setSpecial(character)
+			else:
+				child.setChar(character)
+			
+			# set character FX
+			if character != " ":
+				if wiggle_flag:
+					child.wiggle()
+				if wobble_flag:
+					child.wobble()
+				if jitter_flag:
+					child.jitter()
+				if jutter_flag:
+					child.jutter()
+				if kachunk_flag:
+					child.kachunk()
+				if glow_flag:
+					child.glow()
+				if bubble_flag:
+					child.bubble()
+				if fire_flag:
+					child.fire()
+				if sparkle_flag:
+					child.sparkle()
+				if rainbow_flag:
+					child.rainbow()
+				if zariel_flag:
+					child.zariel()
+				if oth_flag:
+					child.oth()
+				if cystam_flag:
+					child.cystam()
+				if kiro_flag:
+					child.kiro()
+				if audient_flag:
+					child.audient()
+				if mersenne_flag:
+					child.mersenne()
+				if world_flag:
+					child.world()
+				if path_flag:
+					child.path()
+				if curopal_flag:
+					child.curopal()
+				if blit_flag:
+					child.blit()
+				if stacks_flag:
+					child.stacks()
+				if misk_flag:
+					child.misk()
+				if black_flag:
+					child.black()
+			
+			# timing
 			if character != " ":
 				var speed = default_speed
+				if character == "," || character == "-":
+					speed = speed * 4
+				if character == "." || character == "-" || character == "?" || character == "!":
+					speed = pause_time
 				if fast_flag:
 					speed = speed * 0.3
 				if slow_flag:
 					speed = speed * 2	
 				await get_tree().create_timer(speed).timeout
+			
 			counter = counter + 1
+			
+	await get_tree().create_timer(end_delay_seconds).timeout
 
 func say(string):
-	clear()
+	await appear()
+	await clear()
 	var wrapped_string = _wordwrap(string)
 	await _display(wrapped_string)
 
 func clear():
-	for child in letter_elements():
-		child.setChar(" ")
+	for child in _letter_elements():
+		child.clear()
 
 func aaaa():
-	for child in letter_elements():
+	for child in _letter_elements():
 		child.setChar("a")
 
 func wobble():
-	for child in letter_elements():
+	for child in _letter_elements():
 		child.wobble()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

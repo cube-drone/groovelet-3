@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dllhg3aovd3lh"]
+[gd_scene load_steps=3 format=3 uid="uid://dllhg3aovd3lh"]
 
 [ext_resource type="Texture2D" uid="uid://deo0p4sakin3u" path="res://sprites/ui/earthbound-box.png" id="1_klokn"]
+[ext_resource type="Script" path="res://sprites/ui/dialog-bg.gd" id="2_luaqa"]
 
 [node name="NinePatchRect" type="NinePatchRect"]
 offset_right = 40.0
@@ -8,5 +9,6 @@ offset_bottom = 40.0
 texture = ExtResource("1_klokn")
 patch_margin_left = 10
 patch_margin_top = 10
-patch_margin_right = 10
+patch_margin_right = 20
 patch_margin_bottom = 10
+script = ExtResource("2_luaqa")

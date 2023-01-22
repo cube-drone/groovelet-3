@@ -1,14 +1,14 @@
 extends Node2D
 
 ## LINE LENGTH
-var actual_line_length = 34		# this is how many actual characters fit per line
-var virtual_line_length = 34	# this is how many characters we want to fit per line
+@export var actual_line_length = 34		# this is how many actual characters fit per line
+@export var virtual_line_length = 34	# this is how many characters we want to fit per line
 
 ## TIMING
-var start_delay_seconds = 0.1	# all of the reset animations actually take some time to execute, this gives them time to run before we start rolling text 
-var end_delay_seconds = 2		# this is just to give you some time to read
-var default_speed = 0.07		# the default number of seconds between characters
-var pause_time = 0.8			# how long a %p% should take
+@export var start_delay_seconds = 0.1	# all of the reset animations actually take some time to execute, this gives them time to run before we start rolling text 
+@export var end_delay_seconds = 2		# this is just to give you some time to read
+@export var default_speed = 0.07		# the default number of seconds between characters
+@export var pause_time = 0.8			# how long a %p% should take
 
 ## CODES
 var NEWLINE_CODE = "%n"			# the character that kicks off a newline

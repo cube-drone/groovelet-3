@@ -429,6 +429,7 @@ _data = {
 
 [node name="base" type="CharacterBody2D"]
 script = ExtResource("1_aywk1")
+character = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("CanvasTexture_0qbpb")
@@ -443,6 +444,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_6qeqb")
 

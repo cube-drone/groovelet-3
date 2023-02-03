@@ -9,7 +9,6 @@ func _process(delta):
 	pass
 
 func setSpecial(specialCharacter):
-	print("setting special: ", specialCharacter)
 	if specialCharacter == "<3" || specialCharacter == "heart":
 		$Sprite2D.frame = 2
 	elif specialCharacter == ":)":

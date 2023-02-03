@@ -1,8 +1,7 @@
 extends Node2D
 
 ## LINE LENGTH
-@export var actual_line_length = 34		# this is how many actual characters fit per line
-@export var virtual_line_length = 34	# this is how many characters we want to fit per line
+var line_length = 34		# this is how many actual characters fit per line
 
 ## TIMING
 @export var start_delay_seconds = 0.1	# all of the reset animations actually take some time to execute, this gives them time to run before we start rolling text 
@@ -12,6 +11,18 @@ extends Node2D
 
 ## CODES
 var NEWLINE_CODE = "%n"			# the character that kicks off a newline
+
+@export var letter_top_left_x = 8
+@export var letter_top_left_y = 13
+@export var letter_bottom_right_x = 14
+@export var letter_bottom_right_y = 14
+@export var letter_width = 5
+@export var letter_height = 7
+@export var leading_height = 2 # space between vertical lines
+@export var kerning_width = 2 # space between horizontal letters
+
+@export var letter_scene: PackedScene
+var letters = []
 
 # Command Language:
 # everything between %% is a command
@@ -47,13 +58,44 @@ var NEWLINE_CODE = "%n"			# the character that kicks off a newline
 # 
 # e.g.: %Wrs% (slow WIGGLE rainbow)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_build()
 	await clear()
 	await hide()
 	$NinePatchRect.scale.y = 0
 	
 	demo()
+	
+func _build():
+	# fill the CharacterContainer with animatable letters
+	var x = $NinePatchRect.position.x + letter_top_left_x
+	var y = $NinePatchRect.position.y + letter_top_left_y
+	var w = $NinePatchRect.size.x - letter_bottom_right_x
+	var h = $NinePatchRect.size.y - letter_bottom_right_y
+	var current_x = x
+	var current_y = y
+	var line_length_counter = 0
+	
+	while current_y < h:
+		## put letter in current position
+		var letter = letter_scene.instantiate()
+		letter.position = $NinePatchRect.position
+		letter.position.x = letter.position.x + current_x
+		letter.position.y = letter.position.y + current_y
+		$LetterContainer.add_child(letter)
+		letters.push_back(letter)
+		
+		## advance to next position
+		line_length_counter += 1
+		current_x = current_x + letter_width + kerning_width
+		if current_x > w:
+			line_length = line_length_counter
+			line_length_counter = 0
+			current_x = x
+			current_y = current_y + letter_height + leading_height
+		
 
 func demo():
 	await get_tree().create_timer(5).timeout
@@ -104,11 +146,7 @@ func disappear():
 # todo: "character set": characters might talk at different speed or with different inflections and we want to know how we can reflect that in the text box
 
 func _letter_elements():
-	var arr = []
-	arr.append_array($letters/top.get_children())
-	arr.append_array($letters/middle.get_children())
-	arr.append_array($letters/bottom.get_children())
-	return arr
+	return letters
 
 func _adjusted_length(string):
 	# counts length, ignoring any control characters
@@ -137,12 +175,12 @@ func _wordwrap(string):
 		var current_line = rows[current_row]
 		var prospective_line_length = _adjusted_length(current_line) + _adjusted_length(word)
 			
-		if prospective_line_length < virtual_line_length && !NEWLINE_CODE in word:
+		if prospective_line_length < line_length && !NEWLINE_CODE in word:
 			rows[current_row] = rows[current_row] + word + " "
-		elif prospective_line_length == virtual_line_length && !NEWLINE_CODE in word:
+		elif prospective_line_length == line_length && !NEWLINE_CODE in word:
 			rows[current_row] = rows[current_row] + word
 		else:
-			while _adjusted_length(rows[current_row]) < actual_line_length:
+			while _adjusted_length(rows[current_row]) < line_length:
 				rows[current_row] = rows[current_row] + " "
 			current_row = current_row + 1
 			rows[current_row] = rows[current_row] + word + " "

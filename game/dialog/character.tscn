@@ -5,6 +5,22 @@
 [ext_resource type="Texture2D" uid="uid://qelmdqsg1ceh" path="res://dialog/character-additions.png" id="2_serjb"]
 [ext_resource type="Animation" uid="uid://dxsjfixa2f2qp" path="res://rainbow.res" id="3_dtebx"]
 
+[sub_resource type="Animation" id="Animation_5v4fh"]
+resource_name = "RESET"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="Animation" id="Animation_p6nv2"]
 resource_name = "bubble"
 length = 0.4
@@ -73,22 +89,6 @@ tracks/0/keys = {
 "values": [10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_5v4fh"]
-resource_name = "RESET"
-length = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ew72"]
 _data = {
 "RESET": SubResource("Animation_5v4fh"),
@@ -138,8 +138,8 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_u5rg5"]
-resource_name = "world"
+[sub_resource type="Animation" id="Animation_iwd4j"]
+resource_name = "audient"
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -151,7 +151,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 0.00784314, 0.0352941, 1), Color(1, 0.258824, 0.286275, 1)]
+"values": [Color(0.952941, 1, 0, 1), Color(0.964706, 1, 0.321569, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -163,11 +163,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 0.00784314, 0.0352941, 1), Color(1, 0.258824, 0.286275, 1)]
+"values": [Color(0.952941, 1, 0, 1), Color(0.964706, 1, 0.321569, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_10svm"]
-resource_name = "oth"
+[sub_resource type="Animation" id="Animation_h8v1c"]
+resource_name = "black"
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -179,7 +179,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.00392157, 1, 0.498039, 1), Color(0.270588, 1, 0.635294, 1)]
+"values": [Color(0, 0, 0, 1), Color(0.0666667, 0.0666667, 0.0666667, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -191,7 +191,63 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.00392157, 1, 0.498039, 1), Color(0.270588, 1, 0.635294, 1)]
+"values": [Color(0.0666667, 0.0666667, 0.0666667, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o368h"]
+resource_name = "blit"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.521569, 0, 1, 1), Color(0.639216, 0.25098, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.521569, 0, 1, 1), Color(0.639216, 0.25098, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6n8et"]
+resource_name = "curopal"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.121569, 0.913725, 1), Color(1, 0.301961, 0.929412, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.121569, 0.913725, 1), Color(1, 0.301961, 0.929412, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_vvbj3"]
@@ -250,34 +306,6 @@ tracks/1/keys = {
 "values": [Color(0.509804, 0.996078, 0, 1), Color(0.643137, 1, 0.258824, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_iwd4j"]
-resource_name = "audient"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.952941, 1, 0, 1), Color(0.964706, 1, 0.321569, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.952941, 1, 0, 1), Color(0.964706, 1, 0.321569, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_ucn20"]
 resource_name = "mersenne"
 loop_mode = 2
@@ -304,90 +332,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 0.607843, 0, 1), Color(1, 0.678431, 0.2, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tmrxi"]
-resource_name = "path"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0.494118, 1), Color(1, 0.25098, 0.623529, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0.494118, 1), Color(1, 0.25098, 0.623529, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_6n8et"]
-resource_name = "curopal"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0.121569, 0.913725, 1), Color(1, 0.301961, 0.929412, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0.121569, 0.913725, 1), Color(1, 0.301961, 0.929412, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_o368h"]
-resource_name = "blit"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.521569, 0, 1, 1), Color(0.639216, 0.25098, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.521569, 0, 1, 1), Color(0.639216, 0.25098, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_p5iof"]
@@ -418,8 +362,8 @@ tracks/1/keys = {
 "values": [Color(0.0117647, 0.4, 1, 1), Color(0.270588, 0.560784, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_t0lly"]
-resource_name = "zariel"
+[sub_resource type="Animation" id="Animation_10svm"]
+resource_name = "oth"
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -431,7 +375,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.00392157, 1, 0.972549, 1), Color(0.239216, 1, 0.976471, 1)]
+"values": [Color(0.00392157, 1, 0.498039, 1), Color(0.270588, 1, 0.635294, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -443,7 +387,35 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.00392157, 1, 0.972549, 1), Color(0.239216, 1, 0.976471, 1)]
+"values": [Color(0.00392157, 1, 0.498039, 1), Color(0.270588, 1, 0.635294, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tmrxi"]
+resource_name = "path"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0.494118, 1), Color(1, 0.25098, 0.623529, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0.494118, 1), Color(1, 0.25098, 0.623529, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_3pf6s"]
@@ -474,8 +446,8 @@ tracks/1/keys = {
 "values": [Color(0.203922, 0.129412, 1, 1), Color(0.466667, 0.419608, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_h8v1c"]
-resource_name = "black"
+[sub_resource type="Animation" id="Animation_u5rg5"]
+resource_name = "world"
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -487,7 +459,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.0666667, 0.0666667, 0.0666667, 1)]
+"values": [Color(1, 0.00784314, 0.0352941, 1), Color(1, 0.258824, 0.286275, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -499,7 +471,35 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.0666667, 0.0666667, 0.0666667, 1), Color(0, 0, 0, 1)]
+"values": [Color(1, 0.00784314, 0.0352941, 1), Color(1, 0.258824, 0.286275, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t0lly"]
+resource_name = "zariel"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.00392157, 1, 0.972549, 1), Color(0.239216, 1, 0.976471, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.00392157, 1, 0.972549, 1), Color(0.239216, 1, 0.976471, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wisuc"]
@@ -519,6 +519,46 @@ _data = {
 "stacks": SubResource("Animation_3pf6s"),
 "world": SubResource("Animation_u5rg5"),
 "zariel": SubResource("Animation_t0lly")
+}
+
+[sub_resource type="Animation" id="Animation_qdvmv"]
+resource_name = "RESET"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_hrot8"]
@@ -562,110 +602,10 @@ tracks/2/keys = {
 "values": [Vector2(1.5, 3), Vector2(4.5, 4), Vector2(3, 4)]
 }
 
-[sub_resource type="Animation" id="Animation_qdvmv"]
-resource_name = "RESET"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3, 4)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kr7bt"]
 _data = {
 "RESET": SubResource("Animation_qdvmv"),
 "kachunk": SubResource("Animation_hrot8")
-}
-
-[sub_resource type="Animation" id="Animation_apf4n"]
-resource_name = "wiggle"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 1), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(3, 4), Vector2(3, 3), Vector2(3, 5), Vector2(3, 4)]
-}
-
-[sub_resource type="Animation" id="Animation_xbsjm"]
-resource_name = "wobble"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 2), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(3, 4), Vector2(3, 2), Vector2(3, 6), Vector2(3, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_iniur"]
@@ -749,6 +689,66 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 4), Vector2(3, 2), Vector2(3, 6), Vector2(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_apf4n"]
+resource_name = "wiggle"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 4), Vector2(3, 3), Vector2(3, 5), Vector2(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_xbsjm"]
+resource_name = "wobble"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(3, 4), Vector2(3, 2), Vector2(3, 6), Vector2(3, 4)]

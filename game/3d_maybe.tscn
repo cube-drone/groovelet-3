@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dads1dconl10w"]
+
+[ext_resource type="Script" path="res://3d_maybe.gd" id="1_8aqri"]
+[ext_resource type="PackedScene" uid="uid://bvogf7n3t1a20" path="res://main.tscn" id="1_h5xyh"]
+[ext_resource type="PackedScene" uid="uid://cnwdm80nf2p41" path="res://3d/SM_Prop_Television_Old_01.fbx" id="3_yosmx"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ctkc1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7facf"]
+texture_filter = 4
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_8aqri")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+canvas_item_default_texture_filter = 0
+size = Vector2i(512, 448)
+size_2d_override = Vector2i(256, 224)
+size_2d_override_stretch = true
+
+[node name="main" parent="SubViewport" instance=ExtResource("1_h5xyh")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10887, 0.129048, 1.01005)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.73644)
+
+[node name="Television" parent="." instance=ExtResource("3_yosmx")]
+transform = Transform3D(1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0.0775453, -0.258274, 0.345247)
+
+[node name="ViewportQuad" type="CSGMesh3D" parent="Television"]
+transform = Transform3D(0.55, 0, 0, 0, 0.43, 0, 0, 0, 0.5, 0.00627875, 0.325462, 0.0848411)
+mesh = SubResource("QuadMesh_ctkc1")
+material = SubResource("StandardMaterial3D_7facf")
